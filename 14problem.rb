@@ -19,7 +19,6 @@ longest_chain = 0
 			n = (n * 3) + 1
 			chain_length += 1
 		end
-	
 	longest_chain = chain_length
 	answer = number_tested if chain_length > longest_chain
 	end
