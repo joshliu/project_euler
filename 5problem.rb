@@ -1,3 +1,5 @@
 require "pry"
+require "prime"
 
-counter = 0
+(1..20).each do |num|
+	
