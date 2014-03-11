@@ -1,21 +1,43 @@
 require "pry"
 
+answer_array = []
 abundant_numbers = []
+testing_array = (1..24).to_a
 
-(1..28123).each do |x|
-	(1..x/2).each do |factor|
-		factor_sum = 0
-		if x % factor == 0
-			factor_sum += factor
+def find_factor(number)
+	factor_array = []
+	if number%2 == 0
+		(1..(number**0.5)).each do |factor|
+			if number % factor == 0
+				factor_array << factor
+				factor_array << (number/factor)
+			end
 		end
-		if factor_sum > x
-			abundant_numbers << x
+	else
+		(1..(number**0.5)).step(2) do |factor|
+			if number % factor == 0
+				factor_array << factor
+				factor_array << (number/factor)
+			end
+		end
+	end
+	return factor_array
+end
+
+(2..12).each do |num|
+	factor_sum = find_factor(num).reduce(:+)
+	if factor_sum > num && abundant_numbers.include?(num) == false
+		abundant_numbers << num
+	end
+end
+
+abundant_numbers.each do |additive1|
+	abundant_numbers.each do |additive2|
+		some_sum = additive2 + additive1
+		if testing_array.include?(some_sum) == false && answer_array.include?(some_sum) == false
+			answer_array << some_sum
 		end
 	end
 end
 
-(1..28123).each do |num|
-	abundant_numbers.each do |additive1|
-		abundant_numbers.each do |additive2|
-			if additive1 + additive2 == num && abundant_numbers.include?(num)
-				abundant_numbers.delete(num)
+binding.pry
