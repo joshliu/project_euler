@@ -5,7 +5,7 @@ shortcuts = {}
 answer = 0
 longest_chain = 0
 
-(1..1000000).each do |num|
+(1..100).each do |num|
 	chain_length = 0
 	number_tested = num
 	unless shortcuts.keys.include?(num)
@@ -22,7 +22,7 @@ longest_chain = 0
 					chain_length += 1
 				end
 			end
-		puts "#{number_tested}, #{Time.now - start}"
+		# puts "#{number_tested}, #{Time.now - start}"
 			if chain_length > longest_chain
 				answer = number_tested
 				longest_chain = chain_length
@@ -34,5 +34,5 @@ longest_chain = 0
 	end
 end
 
-puts "Took #{Time.now - start} seconds. The answer is #{answer}."
+# puts "Took #{Time.now - start} seconds. The answer is #{answer}."
 binding.pry

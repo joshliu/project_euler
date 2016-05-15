@@ -1,45 +1,30 @@
 require "pry"
 
-# shortcut_collection = {}
-
-# def shortcut(num)
-# 	shortcut_collection[num] = chain_length
-# end
-
-# answer = 0
-# longest_chain = 0
-# (1..1000000).each do |n|
-# 	number_tested = n
-# 	chain_length = 0
-# 	until n == 1
-# 		if n % 2 == 0
-# 			n = n / 2
-# 			chain_length += 1
-# 		else
-# 			n = (n * 3) + 1
-# 			chain_length += 1
-# 		end
-# 	longest_chain = chain_length
-# 	answer = number_tested if chain_length > longest_chain
-# 	end
-# end
-
-def collatz(n, index)
-	if n == 1
-		index
-	elsif n.odd?
-		collatz(3*n+1, index+1)
-	else
-		collatz(n/2, index+1)
-	end
-end
-
 answer = 0
+longest_chain = 0
 
-(1..1000000).each do |i|
-	if collatz(i, 1) > answer
-		answer = collatz
+$h = {}
+
+def collatz(n,i,og_n)
+	if n == 1
+		$h[og_n] = i
+		return i
+	elsif $h[n] != nil
+		$h[og_n] = i+$h[n]
+		return i+$h[n]
+	elsif n % 2 == 0
+		collatz(n/2,i+1,og_n)
+	else
+		collatz(3*n+1,i+1,og_n)
 	end
 end
 
-binding.pry
+(1...1000000).each do |n|
+	l = collatz(n,0,n)
+	if l > longest_chain
+		answer = n
+		longest_chain = l
+	end
+end
+
+puts answer
