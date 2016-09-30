@@ -7,10 +7,10 @@ bottomleft = 0
 bottomright = 0
 
 (1..1001).step(2) do |x|
-	topright += (x**2)
-	topleft += ((x**2)-(x-1))
-	bottomleft += ((x-1)**2)+1
-	bottomright += ((x-1)**2)-(x-2)
+  topright += (x**2)
+  topleft += ((x**2)-(x-1))
+  bottomleft += ((x-1)**2)+1
+  bottomright += ((x-1)**2)-(x-2)
 end
 
 sum += topleft
